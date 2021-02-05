@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "POS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #SalesTable tr > *:nth-child(1){
+        display:none
+    }
+    #SalesTable tr > *:nth-child(2) {
+        display: none
+    }
+    #SalesTable tr > *:nth-child(3) {
+        display: none
+    }
+     #SalesTable tr > *:nth-child(4) {
+        display: none
+    }
+    #SalesTable tr > *:nth-child(5) {
+        display: none
+    }
+    .iconragas{
+        cursor:pointer
+    }
+</style>
+
+<div class="row">
+    <div class="page-categories">
+        <h3 class="title text-center" style="height:110px">
+            <img class="iconragas" src="~/PictureResources/agas-removebg-preview.png" onclick="window.location='/Home/Index'"/>
+        </h3>
+        <br />
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-12 ml-auto mr-auto">
+
+
+            <div class="tab-content tab-space tab-subcategories">
+                <div class="tab-pane active" id="link7">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="link4">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header card-header-primary card-header-icon">
+                                                        <div class="card-icon">
+                                                            <i class="material-icons">assignment</i>
+                                                        </div>
+                                                        <h4 class="card-title">Product and Services</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="toolbar">
+                                                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                                        </div>
+                                                        <div class="material-datatables">
+                                                            <table id="ItemTable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%"></table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end content-->
+                                                </div>
+                                                <!--  end card  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="link4">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header card-header-primary card-header-icon">
+                                                        <div class="card-icon">
+                                                            <i class="material-icons">receipt</i>
+                                                        </div>
+                                                        <h4 class="card-title">Purchase Items</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="toolbar">
+                                                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                                        </div>
+                                                        <div class="material-datatables">
+                                                            <table id="SalesTable" class="table table-no-bordered " cellspacing="0" width="100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="display:none">ID</th>
+                                                                        <th style="display:none"></th>
+                                                                        <th style="display:none"></th>
+                                                                        <th>Name</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Price</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end content-->
+                                                </div>
+                                                <!--  end card  -->
+                                                <div class="card col-md-4 offset-8">
+                                                    <div class="card-header">
+                                                        <h2 class="card-title">Total: <label><h2 style="color:black" id="TheTotal"></h2></label></h2>
+                                                    </div>
+                                                   
+                                                </div>
+                                                <!--  end card  -->
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button class="btn btn-success btn-lg" style="width:100%;font-size:25px" id="btnCheckout">
+                                                    <i class="material-icons" style="font-size:40px">shopping_cart</i> Checkout
+                                                    <div class="ripple-container"></div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+       
+        @section Scripts{
+            <script src="~/Scripts/POSJavascript/pos.js"></script>
+        }
+
+
+
+

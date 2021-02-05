@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RISDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="M_Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Family_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Date_Hired" Type="varchar" MaxLength="100" />
+          <Property Name="DailyWage" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Date_Resigned" Type="varchar" MaxLength="100" />
+          <Property Name="EmployeePhoto" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="M_Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCategory" Type="bigint" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="RetailPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="CurrentStock" Type="bigint" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="M_ItemCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="M_Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceCategory" Type="bigint" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="M_ServiceCategory">
+          <Key>
+            <PropertyRef Name="ID2" />
+          </Key>
+          <Property Name="ID2" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryNameSer" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhotoSer" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="M_Stocks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="bigint" />
+          <Property Name="StockType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="StockQty" Type="bigint" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="20" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="M_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResetPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserPhoto" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POS_Receipt">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptRefNo" Type="nvarchar" MaxLength="200" />
+          <Property Name="ItemID" Type="bigint" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="RetailPrice" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="GET_M_EmployeeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_M_ItemList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_M_ServiceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_POS_ItemServiceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PageCount" Type="int" Mode="In" />
+          <Parameter Name="RowCount" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GET_POS_ItemServiceList_details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReceiptNo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Total" Type="decimal" Mode="InOut" />
+        </Function>
+        <Function Name="GET_POS_ReceiptList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="DateTo" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GET_R_DailyReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GET_T_InboundOutboundHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="bigint" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="RISDBModelStoreContainer">
+          <EntitySet Name="M_Employee" EntityType="Self.M_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Item" EntityType="Self.M_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_ItemCategory" EntityType="Self.M_ItemCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Service" EntityType="Self.M_Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_ServiceCategory" EntityType="Self.M_ServiceCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Stocks" EntityType="Self.M_Stocks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Users" EntityType="Self.M_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POS_Receipt" EntityType="Self.POS_Receipt" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RISDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RISDBEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GET_M_ServiceList" ReturnType="Collection(RISDBModel.GET_M_ServiceList_Result)" />
+          <FunctionImport Name="GET_T_InboundOutboundHistory" ReturnType="Collection(RISDBModel.GET_T_InboundOutboundHistory_Result)">
+            <Parameter Name="Category" Mode="In" Type="Int64" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GET_M_ItemList" ReturnType="Collection(RISDBModel.GET_M_ItemList_Result)" />
+          <FunctionImport Name="GET_POS_ItemServiceList" ReturnType="Collection(RISDBModel.GET_POS_ItemServiceList_Result)">
+            <Parameter Name="PageCount" Mode="In" Type="Int32" />
+            <Parameter Name="RowCount" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GET_POS_ReceiptList" ReturnType="Collection(RISDBModel.GET_POS_ReceiptList_Result)">
+            <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="M_Item" EntityType="RISDBModel.M_Item" />
+          <EntitySet Name="M_ItemCategory" EntityType="RISDBModel.M_ItemCategory" />
+          <EntitySet Name="M_Service" EntityType="RISDBModel.M_Service" />
+          <EntitySet Name="M_ServiceCategory" EntityType="RISDBModel.M_ServiceCategory" />
+          <EntitySet Name="M_Stocks" EntityType="RISDBModel.M_Stocks" />
+          <EntitySet Name="M_Users" EntityType="RISDBModel.M_Users" />
+          <EntitySet Name="POS_Receipt" EntityType="RISDBModel.POS_Receipt" />
+          <EntitySet Name="M_Employee" EntityType="RISDBModel.M_Employee" />
+          <FunctionImport Name="GET_M_EmployeeList" ReturnType="Collection(RISDBModel.GET_M_EmployeeList_Result)" />
+          <FunctionImport Name="GET_R_DailyReports" ReturnType="Collection(RISDBModel.GET_R_DailyReports_Result)" />
+          <FunctionImport Name="GET_POS_ItemServiceList_details" ReturnType="Collection(RISDBModel.GET_POS_ItemServiceList_details_Result)">
+            <Parameter Name="ReceiptNo" Mode="In" Type="String" />
+            <Parameter Name="Total" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="GET_M_ServiceList_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" />
+          <Property Type="Int64" Name="ServiceCategory" Nullable="true" />
+          <Property Type="String" Name="ServiceCategorySer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ServiceName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Price" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GET_T_InboundOutboundHistory_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int64" Name="ItemID" Nullable="true" />
+          <Property Type="String" Name="StockType" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="StockQty" Nullable="true" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="UpdateID" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GET_M_ItemList_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" />
+          <Property Type="Int64" Name="ItemCategory" Nullable="true" />
+          <Property Type="String" Name="ItemCategoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="RetailPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int64" Name="CurrentStock" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GET_POS_ItemServiceList_Result">
+          <Property Type="Int64" Name="Rownum" Nullable="true" />
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" />
+          <Property Type="Int64" Name="ItemCategory" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="RetailPrice" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int64" Name="CurrentStock" Nullable="false" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="7" />
+        </ComplexType>
+        <ComplexType Name="GET_POS_ReceiptList_Result">
+          <Property Type="String" Name="ReceiptRefNo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <EntityType Name="M_Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCategory" Type="Int64" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="RetailPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CurrentStock" Type="Int64" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_ItemCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceCategory" Type="Int64" />
+          <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_ServiceCategory">
+          <Key>
+            <PropertyRef Name="ID2" />
+          </Key>
+          <Property Name="ID2" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryNameSer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoSer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Stocks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="Int64" />
+          <Property Name="StockType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="StockQty" Type="Int64" />
+          <Property Name="Remarks" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResetPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="POS_Receipt">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptRefNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ItemID" Type="Int64" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="RetailPrice" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Family_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Hired" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DailyWage" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date_Resigned" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <ComplexType Name="GET_M_EmployeeList_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Family_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Date_Hired" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="DailyWage" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Date_Resigned" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="EmployeePhoto" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="String" Name="CreateID" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UpdateID" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GET_R_DailyReports_Result">
+          <Property Type="Decimal" Name="TotalProfit" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GET_POS_ItemServiceList_details_Result">
+          <Property Type="String" Name="ReceiptRefNo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="Int32" Name="RetailPrice" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RISDBModelStoreContainer" CdmEntityContainer="RISDBEntities">
+          <FunctionImportMapping FunctionImportName="GET_M_ServiceList" FunctionName="RISDBModel.Store.GET_M_ServiceList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_M_ServiceList_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ServiceCategory" ColumnName="ServiceCategory" />
+                <ScalarProperty Name="ServiceCategorySer" ColumnName="ServiceCategorySer" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_T_InboundOutboundHistory" FunctionName="RISDBModel.Store.GET_T_InboundOutboundHistory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_T_InboundOutboundHistory_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="StockType" ColumnName="StockType" />
+                <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_M_ItemList" FunctionName="RISDBModel.Store.GET_M_ItemList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_M_ItemList_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
+                <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_POS_ItemServiceList" FunctionName="RISDBModel.Store.GET_POS_ItemServiceList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ItemServiceList_Result">
+                <ScalarProperty Name="Rownum" ColumnName="Rownum" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_POS_ReceiptList" FunctionName="RISDBModel.Store.GET_POS_ReceiptList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ReceiptList_Result">
+                <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="M_Item">
+            <EntityTypeMapping TypeName="RISDBModel.M_Item">
+              <MappingFragment StoreEntitySet="M_Item">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_ItemCategory">
+            <EntityTypeMapping TypeName="RISDBModel.M_ItemCategory">
+              <MappingFragment StoreEntitySet="M_ItemCategory">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Service">
+            <EntityTypeMapping TypeName="RISDBModel.M_Service">
+              <MappingFragment StoreEntitySet="M_Service">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceCategory" ColumnName="ServiceCategory" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_ServiceCategory">
+            <EntityTypeMapping TypeName="RISDBModel.M_ServiceCategory">
+              <MappingFragment StoreEntitySet="M_ServiceCategory">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PhotoSer" ColumnName="PhotoSer" />
+                <ScalarProperty Name="CategoryNameSer" ColumnName="CategoryNameSer" />
+                <ScalarProperty Name="ID2" ColumnName="ID2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Stocks">
+            <EntityTypeMapping TypeName="RISDBModel.M_Stocks">
+              <MappingFragment StoreEntitySet="M_Stocks">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StockType" ColumnName="StockType" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Users">
+            <EntityTypeMapping TypeName="RISDBModel.M_Users">
+              <MappingFragment StoreEntitySet="M_Users">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="ResetPassword" ColumnName="ResetPassword" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POS_Receipt">
+            <EntityTypeMapping TypeName="RISDBModel.POS_Receipt">
+              <MappingFragment StoreEntitySet="POS_Receipt">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Employee">
+            <EntityTypeMapping TypeName="RISDBModel.M_Employee">
+              <MappingFragment StoreEntitySet="M_Employee">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
+                <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
+                <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
+                <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GET_M_EmployeeList" FunctionName="RISDBModel.Store.GET_M_EmployeeList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_M_EmployeeList_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
+                <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
+                <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
+                <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_R_DailyReports" FunctionName="RISDBModel.Store.GET_R_DailyReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_R_DailyReports_Result">
+                <ScalarProperty Name="TotalProfit" ColumnName="TotalProfit" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_POS_ItemServiceList_details" FunctionName="RISDBModel.Store.GET_POS_ItemServiceList_details">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ItemServiceList_details_Result">
+                <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

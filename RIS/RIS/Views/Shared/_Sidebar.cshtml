@@ -1,0 +1,182 @@
+﻿@using RIS.Models;
+@using System.Data.SqlClient;
+@using RIS.Controllers;
+@using System.Configuration;
+@{
+    string UserName = string.Empty;
+   
+    string Userphoto = string.Empty;
+    string UserSection = string.Empty;
+    if ((M_Users)(Session["user"]) != null)
+    {
+        M_Users UserInfo = (M_Users)(Session["user"]);
+        UserName = UserInfo.FirstName + " " + UserInfo.LastName;
+        string picuser = "";
+        if (UserInfo.UserPhoto == "" || UserInfo.UserPhoto == null)
+        {
+            Userphoto = "/PictureResources/UsersPhoto/2014-09-16-Anoynmous-The-Rise-of-Personal-Networks.jpg";
+        }
+        else
+        {
+            Userphoto = "/PictureResources/UsersPhoto/" + UserInfo.UserPhoto;
+        }
+    }
+    else
+    {
+        Url.Action("Logout", "Login");
+    }
+}
+@{
+    Layout = null;
+}
+
+
+<div class="sidebar" data-color="rose" data-background-color="black" data-image="~/Content/assets/img/sidebar-1.jpg">
+    <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+
+    <div class="logo">
+        <a href="/" class="simple-text logo-mini">
+            <i class='material-icons'>dns</i>
+        </a>
+
+        <a href="/" class="simple-text logo-normal">
+            R Inventory
+        </a>
+    </div>
+
+    <div class="sidebar-wrapper">
+
+        <div class="user">
+            <div class="photo">
+                <img src=@Userphoto />
+            </div>
+            <div class="user-info">
+                <a data-toggle="collapse" href="#collapseExample" class="username">
+                    <span>
+                        @UserName
+                        <b class="caret"></b>
+                    </span>
+                </a>
+                <div class="collapse" id="collapseExample">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/ChangePassword">
+                                <span class="sidebar-mini"> <i class='material-icons'>lock</i> </span>
+                                <span class="sidebar-normal"> Change Password </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Login/Login">
+                                <span class="sidebar-mini"> <i class='material-icons'>exit_to_app</i> </span>
+                                <span class="sidebar-normal"> Log Off </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <ul class="nav" id="themenu">
+
+            <li class="nav-item" id="dashboardl">
+                <a class="nav-link" href="/Home/Index">
+                    <i class="material-icons">dashboard</i>
+                    <p> Dashboard </p>
+                </a>
+            </li>
+
+            <li class="nav-item " id="Mastermodule">
+                <a class="nav-link" data-toggle="collapse" href="#master">
+                    <i class="material-icons">apps</i>
+                    <p>
+                        Masters
+                        <b class="caret"></b>
+                    </p>
+                </a>
+
+                <div class="collapse" id="master">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Masters/Users/Users">
+                                <span class="sidebar-mini">  <i class='material-icons'>face</i> </span>
+                                <span class="sidebar-normal"> Users </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Masters/Employee/Employee">
+                                <span class="sidebar-mini">  <i class='material-icons'>directions_run</i> </span>
+                                <span class="sidebar-normal"> Employee </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Masters/Category/Category">
+                                <span class="sidebar-mini">  <i class='material-icons'>category</i> </span>
+                                <span class="sidebar-normal"> Category </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Masters/Item/Item">
+                                <span class="sidebar-mini">  <i class='material-icons'>store</i> </span>
+                                <span class="sidebar-normal"> Items </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Masters/Service/Service">
+                                <span class="sidebar-mini">  <i class='material-icons'>directions_run</i> </span>
+                                <span class="sidebar-normal"> Services </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item " id="Transaction">
+                <a class="nav-link" data-toggle="collapse" href="#transaction">
+                    <i class="material-icons">reorder</i>
+                    <p>
+                        Transactions
+                        <b class="caret"></b>
+                    </p>
+                </a>
+
+                <div class="collapse" id="transaction">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Transaction/InboundOutbound/InboundOutbound">
+                                <span class="sidebar-mini">  <i class='material-icons'>grading</i> </span>
+                                <span class="sidebar-normal"> Inbound/Outbound Items </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Transaction/InboundOutboundHistory/InboundOutboundHistory">
+                                <span class="sidebar-mini">  <i class='material-icons'>history</i> </span>
+                                <span class="sidebar-normal"> Inbound/Outbound History </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/Transaction/POSReceipt/POSReceipt">
+                                <span class="sidebar-mini">  <i class='material-icons'>history</i> </span>
+                                <span class="sidebar-normal"> POS Receipt </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item" id="pos1">
+                <a class="nav-link" href="/POS/POS">
+                    <i class="material-icons">dashboard</i>
+                    <p> POS </p>
+                </a>
+            </li>
+
+        </ul>
+
+
+
+    </div>
+</div>
+

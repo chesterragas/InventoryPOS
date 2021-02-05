@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RISDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="M_Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Family_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="First_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Date_Hired" Type="varchar" MaxLength="100" />
+    <Property Name="DailyWage" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Date_Resigned" Type="varchar" MaxLength="100" />
+    <Property Name="EmployeePhoto" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_Item">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemCategory" Type="bigint" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="RetailPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CurrentStock" Type="bigint" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_ItemCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceCategory" Type="bigint" />
+    <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar(max)" />
+    <Property Name="Price" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_ServiceCategory">
+    <Key>
+      <PropertyRef Name="ID2" />
+    </Key>
+    <Property Name="ID2" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryNameSer" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhotoSer" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_Stocks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="bigint" />
+    <Property Name="StockType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="StockQty" Type="bigint" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="20" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="M_Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="ResetPassword" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserPhoto" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="POS_Receipt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReceiptRefNo" Type="nvarchar" MaxLength="200" />
+    <Property Name="ItemID" Type="bigint" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="Price" Type="int" />
+    <Property Name="RetailPrice" Type="int" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Function Name="GET_M_EmployeeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_M_ItemList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_M_ServiceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_POS_ItemServiceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PageCount" Type="int" Mode="In" />
+    <Parameter Name="RowCount" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GET_POS_ItemServiceList_details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReceiptNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Total" Type="decimal" Mode="InOut" />
+  </Function>
+  <Function Name="GET_POS_ReceiptList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DateFrom" Type="datetime" Mode="In" />
+    <Parameter Name="DateTo" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GET_R_DailyReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GET_T_InboundOutboundHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Category" Type="bigint" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="RISDBModelStoreContainer">
+    <EntitySet Name="M_Employee" EntityType="Self.M_Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_Item" EntityType="Self.M_Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_ItemCategory" EntityType="Self.M_ItemCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_Service" EntityType="Self.M_Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_ServiceCategory" EntityType="Self.M_ServiceCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_Stocks" EntityType="Self.M_Stocks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="M_Users" EntityType="Self.M_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POS_Receipt" EntityType="Self.POS_Receipt" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

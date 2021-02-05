@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RISDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RISDBEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GET_M_ServiceList" ReturnType="Collection(RISDBModel.GET_M_ServiceList_Result)" />
+    <FunctionImport Name="GET_T_InboundOutboundHistory" ReturnType="Collection(RISDBModel.GET_T_InboundOutboundHistory_Result)">
+      <Parameter Name="Category" Mode="In" Type="Int64" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GET_M_ItemList" ReturnType="Collection(RISDBModel.GET_M_ItemList_Result)" />
+    <FunctionImport Name="GET_POS_ItemServiceList" ReturnType="Collection(RISDBModel.GET_POS_ItemServiceList_Result)">
+      <Parameter Name="PageCount" Mode="In" Type="Int32" />
+      <Parameter Name="RowCount" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GET_POS_ReceiptList" ReturnType="Collection(RISDBModel.GET_POS_ReceiptList_Result)">
+      <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
+      <Parameter Name="DateTo" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="M_Item" EntityType="RISDBModel.M_Item" />
+    <EntitySet Name="M_ItemCategory" EntityType="RISDBModel.M_ItemCategory" />
+    <EntitySet Name="M_Service" EntityType="RISDBModel.M_Service" />
+    <EntitySet Name="M_ServiceCategory" EntityType="RISDBModel.M_ServiceCategory" />
+    <EntitySet Name="M_Stocks" EntityType="RISDBModel.M_Stocks" />
+    <EntitySet Name="M_Users" EntityType="RISDBModel.M_Users" />
+    <EntitySet Name="POS_Receipt" EntityType="RISDBModel.POS_Receipt" />
+    <EntitySet Name="M_Employee" EntityType="RISDBModel.M_Employee" />
+    <FunctionImport Name="GET_M_EmployeeList" ReturnType="Collection(RISDBModel.GET_M_EmployeeList_Result)" />
+    <FunctionImport Name="GET_R_DailyReports" ReturnType="Collection(RISDBModel.GET_R_DailyReports_Result)" />
+    <FunctionImport Name="GET_POS_ItemServiceList_details" ReturnType="Collection(RISDBModel.GET_POS_ItemServiceList_details_Result)">
+      <Parameter Name="ReceiptNo" Mode="In" Type="String" />
+      <Parameter Name="Total" Mode="InOut" Type="Decimal" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GET_M_ServiceList_Result">
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="Int64" Name="ServiceCategory" Nullable="true" />
+    <Property Type="String" Name="ServiceCategorySer" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ServiceName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Price" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GET_T_InboundOutboundHistory_Result">
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="Int64" Name="ItemID" Nullable="true" />
+    <Property Type="String" Name="StockType" Nullable="true" MaxLength="50" />
+    <Property Type="Int64" Name="StockQty" Nullable="true" />
+    <Property Type="String" Name="Remarks" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="UpdateID" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="UpdateDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GET_M_ItemList_Result">
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="Int64" Name="ItemCategory" Nullable="true" />
+    <Property Type="String" Name="ItemCategoryName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="RetailPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Int64" Name="CurrentStock" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GET_POS_ItemServiceList_Result">
+    <Property Type="Int64" Name="Rownum" Nullable="true" />
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="Int64" Name="ItemCategory" Nullable="true" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="RetailPrice" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Int64" Name="CurrentStock" Nullable="false" />
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="7" />
+  </ComplexType>
+  <ComplexType Name="GET_POS_ReceiptList_Result">
+    <Property Type="String" Name="ReceiptRefNo" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Date" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <EntityType Name="M_Item">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemCategory" Type="Int64" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="RetailPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CurrentStock" Type="Int64" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="M_ItemCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="M_Service">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceCategory" Type="Int64" />
+    <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="M_ServiceCategory">
+    <Key>
+      <PropertyRef Name="ID2" />
+    </Key>
+    <Property Name="ID2" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryNameSer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhotoSer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="M_Stocks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemID" Type="Int64" />
+    <Property Name="StockType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="StockQty" Type="Int64" />
+    <Property Name="Remarks" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="M_Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ResetPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="POS_Receipt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptRefNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ItemID" Type="Int64" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="RetailPrice" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="M_Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Family_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Date_Hired" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DailyWage" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Date_Resigned" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <ComplexType Name="GET_M_EmployeeList_Result">
+    <Property Type="Int64" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Family_Name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="First_Name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Date_Hired" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="DailyWage" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="Date_Resigned" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="EmployeePhoto" Nullable="true" />
+    <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+    <Property Type="String" Name="CreateID" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="UpdateID" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="UpdateDate" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GET_R_DailyReports_Result">
+    <Property Type="Decimal" Name="TotalProfit" Nullable="true" Precision="38" Scale="0" />
+    <Property Type="String" Name="Date" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="GET_POS_ItemServiceList_details_Result">
+    <Property Type="String" Name="ReceiptRefNo" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Amount" Nullable="true" />
+    <Property Type="Int32" Name="RetailPrice" Nullable="true" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

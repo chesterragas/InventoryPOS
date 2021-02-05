@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "InboundOutboundHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+      
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Inbound/Outbound History</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body ">
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Item Category</label>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="selectpicker filter" data-style="btn btn-default" id="ItemCategory" name="ItemCategory" title="Category"></select>
+                                    </div>
+                                </div>
+
+                                <label class="col-sm-1 col-form-label">Type</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <select class="selectpicker filter" data-style="btn btn-default" id="Type" name="Type">
+                                            <option value="">--TYPE--</option>
+                                            <option value="In">Inbound</option>
+                                            <option value="Out">Outbound</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="material-datatables">
+                            <table id="HistoryStockTable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%"></table>
+                        </div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+
+</div>
+
+
+@section Scripts{
+
+    <script src="~/Areas/Transaction/Javascript/InboundOutboundHistory.js"></script>
+
+}

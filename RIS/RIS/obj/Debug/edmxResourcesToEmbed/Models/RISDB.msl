@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RISDBModelStoreContainer" CdmEntityContainer="RISDBEntities">
+    <FunctionImportMapping FunctionImportName="GET_M_ServiceList" FunctionName="RISDBModel.Store.GET_M_ServiceList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_M_ServiceList_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ServiceCategory" ColumnName="ServiceCategory" />
+          <ScalarProperty Name="ServiceCategorySer" ColumnName="ServiceCategorySer" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_T_InboundOutboundHistory" FunctionName="RISDBModel.Store.GET_T_InboundOutboundHistory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_T_InboundOutboundHistory_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="StockType" ColumnName="StockType" />
+          <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_M_ItemList" FunctionName="RISDBModel.Store.GET_M_ItemList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_M_ItemList_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
+          <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_POS_ItemServiceList" FunctionName="RISDBModel.Store.GET_POS_ItemServiceList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ItemServiceList_Result">
+          <ScalarProperty Name="Rownum" ColumnName="Rownum" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_POS_ReceiptList" FunctionName="RISDBModel.Store.GET_POS_ReceiptList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ReceiptList_Result">
+          <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="M_Item">
+      <EntityTypeMapping TypeName="RISDBModel.M_Item">
+        <MappingFragment StoreEntitySet="M_Item">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_ItemCategory">
+      <EntityTypeMapping TypeName="RISDBModel.M_ItemCategory">
+        <MappingFragment StoreEntitySet="M_ItemCategory">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_Service">
+      <EntityTypeMapping TypeName="RISDBModel.M_Service">
+        <MappingFragment StoreEntitySet="M_Service">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="ServiceCategory" ColumnName="ServiceCategory" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_ServiceCategory">
+      <EntityTypeMapping TypeName="RISDBModel.M_ServiceCategory">
+        <MappingFragment StoreEntitySet="M_ServiceCategory">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="PhotoSer" ColumnName="PhotoSer" />
+          <ScalarProperty Name="CategoryNameSer" ColumnName="CategoryNameSer" />
+          <ScalarProperty Name="ID2" ColumnName="ID2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_Stocks">
+      <EntityTypeMapping TypeName="RISDBModel.M_Stocks">
+        <MappingFragment StoreEntitySet="M_Stocks">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="StockType" ColumnName="StockType" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_Users">
+      <EntityTypeMapping TypeName="RISDBModel.M_Users">
+        <MappingFragment StoreEntitySet="M_Users">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+          <ScalarProperty Name="ResetPassword" ColumnName="ResetPassword" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POS_Receipt">
+      <EntityTypeMapping TypeName="RISDBModel.POS_Receipt">
+        <MappingFragment StoreEntitySet="POS_Receipt">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_Employee">
+      <EntityTypeMapping TypeName="RISDBModel.M_Employee">
+        <MappingFragment StoreEntitySet="M_Employee">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
+          <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
+          <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
+          <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GET_M_EmployeeList" FunctionName="RISDBModel.Store.GET_M_EmployeeList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_M_EmployeeList_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
+          <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
+          <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
+          <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_R_DailyReports" FunctionName="RISDBModel.Store.GET_R_DailyReports">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_R_DailyReports_Result">
+          <ScalarProperty Name="TotalProfit" ColumnName="TotalProfit" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GET_POS_ItemServiceList_details" FunctionName="RISDBModel.Store.GET_POS_ItemServiceList_details">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ItemServiceList_details_Result">
+          <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<!-- C3 CSS -->
+<link href="~/Graph/css/c3/c3.css" rel="stylesheet" />
+
+
+
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Daily Reports</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div id="barGraphOne" class="chart-height1"></div>
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+
+</div>
+
+@section Scripts{
+
+    <!-- Bar Indicator JS -->
+    <script src="~/Graph/js/jquery.easing.1.3.js"></script>
+    <script src="~/Graph/js/barIndicator/barIndicator.js"></script>
+
+
+    <!-- D3 JS -->
+    <script src="~/Graph/js/d3/d3.v3.min.js"></script>
+
+    <!-- C3 Graphs -->
+    <script src="~/Graph/js/c3/c3.min.js"></script>
+    <script src="~/Graph/js/c3/custom-bar-one.js"></script>
+}
+
+
+
+
+
