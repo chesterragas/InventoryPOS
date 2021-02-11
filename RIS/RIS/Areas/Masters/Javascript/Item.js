@@ -207,7 +207,7 @@ function AddItem(data) {
 
 
 function EditItem(data) {
-    var datanow = data.serialize();
+    var datanow = data.serialize() + "&Photo=" + imageName;
     $.ajax({
         url: '../Item/EditItem',
         data: datanow,

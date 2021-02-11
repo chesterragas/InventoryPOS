@@ -20,7 +20,7 @@
         imageName = file1.name;
         $.ajax({
             type: 'POST',
-            url: '/Employee/UploadEmployeePhoto',
+            url: '/Employee/UploadPhoto',
             data: files,
             dataType: 'json',
             cache: false,
@@ -75,7 +75,7 @@ function Initializepage() {
             {
                 title: "Photo", data: function (x) {
                     var logO = "";
-                    if (x.Photo == '' || x.Photo == null || x.Photo == "undefined") {
+                    if (x.EmployeePhoto == '' || x.EmployeePhoto == null || x.EmployeePhoto == "undefined") {
                         logO = '/PictureResources/no_item.gif';
                     }
                     else {
@@ -142,7 +142,7 @@ function Initializepage() {
 }
 
 function AddEmployee(data) {
-    var datanow = data.serialize() + "&Photo=" + imageName;
+    var datanow = data.serialize() + "&EmployeePhoto=" + imageName;
     $.ajax({
         url: '../Employee/CreateEmployee',
         data: datanow,

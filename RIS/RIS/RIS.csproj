@@ -137,12 +137,16 @@
     <Compile Include="Areas\Transaction\Controllers\InboundOutboundHistoryController.cs" />
     <Compile Include="Areas\Transaction\Controllers\POSReceiptController.cs" />
     <Compile Include="Areas\Transaction\TransactionAreaRegistration.cs" />
+    <Compile Include="Controllers\EmployeeAttendanceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\POSController.cs" />
     <Compile Include="Controllers\SessionExpire.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GET_M_EmployeeAttendanceList_Result.cs">
+      <DependentUpon>RISDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GET_M_EmployeeList_Result.cs">
       <DependentUpon>RISDB.tt</DependentUpon>
@@ -206,6 +210,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RISDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_EmployeeLogs.cs">
+      <DependentUpon>RISDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserPass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -310,6 +317,7 @@
     <Content Include="PictureResources\ItemPhoto\2014-09-16-Anoynmous-The-Rise-of-Personal-Networks.jpg" />
     <Content Include="PictureResources\no_item.gif" />
     <Content Include="PictureResources\ragasicon.ico" />
+    <Content Include="Scripts\Attendance\Attendance.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Masters\Views\web.config" />
@@ -342,10 +350,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\POSJavascript\custom-bar-one.js" />
     <Content Include="Scripts\POSJavascript\pos.js" />
     <Content Include="Scripts\SAm.js" />
     <Content Include="Scripts\Sidebar.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -366,6 +377,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
     <Content Include="Views\POS\POS.cshtml" />
+    <Content Include="Views\EmployeeAttendance\EmployeeAttendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

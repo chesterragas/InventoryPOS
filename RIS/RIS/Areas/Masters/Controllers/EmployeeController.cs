@@ -1,8 +1,11 @@
-﻿using RIS.Models;
+﻿using RIS.Controllers;
+using RIS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using static RIS.Controllers.SessionExpire;
@@ -14,6 +17,8 @@ namespace RIS.Areas.Masters.Controllers
         RISDBEntities db = new RISDBEntities();
         M_Users user = (M_Users)System.Web.HttpContext.Current.Session["user"];
         // GET: Masters/Employee
+
+        [SessionExpire]
         public ActionResult Employee()
         {
             return View();
@@ -157,6 +162,29 @@ namespace RIS.Areas.Masters.Controllers
 
                 return Json(new { msg = err.Message }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+
+        public ActionResult GetEmployeeDataList()
+        {
+            List<GET_M_EmployeeList_Result> list = db.GET_M_EmployeeList().ToList();
+            return Json(new { data = list }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UploadPhoto()
+        {
+            #region Save to Server
+            bool isSuccess = false;
+            string serverMessage = string.Empty;
+            var fileOne = Request.Files[0] as HttpPostedFileBase;
+            string uploadPath = Server.MapPath(@"~/PictureResources/EmployeePhoto/");
+            string newFileOne = Path.Combine(uploadPath, fileOne.FileName);
+            fileOne.SaveAs(HttpContext.Server.MapPath("~/PictureResources/EmployeePhoto/") + Path.GetFileName(Regex.Replace(fileOne.FileName, @"\s+", "")));
+
+            #endregion
+
+            return Json(new { itemName = Path.GetFileName(Regex.Replace(fileOne.FileName, @"\s+", "")) }, JsonRequestBehavior.AllowGet);
         }
     }
 }

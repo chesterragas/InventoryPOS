@@ -28,6 +28,7 @@ namespace RIS.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<M_Employee> M_Employee { get; set; }
         public DbSet<M_Item> M_Item { get; set; }
         public DbSet<M_ItemCategory> M_ItemCategory { get; set; }
         public DbSet<M_Service> M_Service { get; set; }
@@ -35,7 +36,7 @@ namespace RIS.Models
         public DbSet<M_Stocks> M_Stocks { get; set; }
         public DbSet<M_Users> M_Users { get; set; }
         public DbSet<POS_Receipt> POS_Receipt { get; set; }
-        public DbSet<M_Employee> M_Employee { get; set; }
+        public DbSet<T_EmployeeLogs> T_EmployeeLogs { get; set; }
     
         public virtual ObjectResult<GET_M_ServiceList_Result> GET_M_ServiceList()
         {
@@ -103,6 +104,29 @@ namespace RIS.Models
                 new ObjectParameter("ReceiptNo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_POS_ItemServiceList_details_Result>("GET_POS_ItemServiceList_details", receiptNoParameter, total);
+        }
+    
+        public virtual ObjectResult<string> GETTIME()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GETTIME");
+        }
+    
+        public virtual int Delete_EmployeeLogs(string date)
+        {
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Delete_EmployeeLogs", dateParameter);
+        }
+    
+        public virtual ObjectResult<GET_M_EmployeeAttendanceList_Result> GET_M_EmployeeAttendanceList(string date)
+        {
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GET_M_EmployeeAttendanceList_Result>("GET_M_EmployeeAttendanceList", dateParameter);
         }
     }
 }

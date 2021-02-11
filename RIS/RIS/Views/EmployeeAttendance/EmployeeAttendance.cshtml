@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeAttendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Attendance Checking</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="info-box" style="background-color:#EFF1F1">
+                                    <input type="hidden" class="form-control input-sm" name="chosendate" id="chosendate" readonly="">
+
+                                    <div class="row">
+                                        <div class="h1 h1center offset-md-4 col-md-6" id="datess" style="font-weight:bold"></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="h1 h1center offset-md-4 col-md-3" id="WeekDay" style="font-weight:bold"></div>
+                                    </div>
+
+
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+
+                        </div>
+                        <div class="toolbar" id="emplist">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6 offset-5">
+                                
+                                <div class="card-body">
+
+                                    <button class="btn btn-success btn-lg" id="checkAttendance">Submit</button>
+                                    <button class="btn btn-warning btn-lg" id="checkAttendanceClear">Clear</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- end content-->
+                </div>
+                <!--  end card  -->
+            </div>
+            <!-- end col-md-12 -->
+        </div>
+        <!-- end row -->
+    </div>
+
+</div>
+
+@section Scripts{
+
+<script src="~/Scripts/Attendance/Attendance.js"></script>
+}

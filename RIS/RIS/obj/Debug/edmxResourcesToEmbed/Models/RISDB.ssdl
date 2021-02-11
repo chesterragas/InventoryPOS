@@ -120,6 +120,25 @@
     <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="T_EmployeeLogs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="bigint" />
+    <Property Name="DateAttendance" Type="nvarchar" MaxLength="100" />
+    <Property Name="Wages" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Function Name="Delete_EmployeeLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GET_M_EmployeeAttendanceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Date" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="GET_M_EmployeeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GET_M_ItemList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GET_M_ServiceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -140,6 +159,7 @@
     <Parameter Name="Category" Type="bigint" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="GETTIME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="RISDBModelStoreContainer">
     <EntitySet Name="M_Employee" EntityType="Self.M_Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="M_Item" EntityType="Self.M_Item" Schema="dbo" store:Type="Tables" />
@@ -149,5 +169,6 @@
     <EntitySet Name="M_Stocks" EntityType="Self.M_Stocks" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="M_Users" EntityType="Self.M_Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="POS_Receipt" EntityType="Self.POS_Receipt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_EmployeeLogs" EntityType="Self.T_EmployeeLogs" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

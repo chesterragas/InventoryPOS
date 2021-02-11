@@ -125,6 +125,25 @@
           <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="T_EmployeeLogs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="bigint" />
+          <Property Name="DateAttendance" Type="nvarchar" MaxLength="100" />
+          <Property Name="Wages" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="Delete_EmployeeLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GET_M_EmployeeAttendanceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GET_M_EmployeeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GET_M_ItemList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GET_M_ServiceList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -145,6 +164,7 @@
           <Parameter Name="Category" Type="bigint" Mode="In" />
           <Parameter Name="Type" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GETTIME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RISDBModelStoreContainer">
           <EntitySet Name="M_Employee" EntityType="Self.M_Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Item" EntityType="Self.M_Item" Schema="dbo" store:Type="Tables" />
@@ -154,6 +174,7 @@
           <EntitySet Name="M_Stocks" EntityType="Self.M_Stocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_Users" EntityType="Self.M_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="POS_Receipt" EntityType="Self.POS_Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_EmployeeLogs" EntityType="Self.T_EmployeeLogs" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -174,6 +195,14 @@
             <Parameter Name="DateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="DateTo" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="GET_M_EmployeeList" ReturnType="Collection(RISDBModel.GET_M_EmployeeList_Result)" />
+          <FunctionImport Name="GET_R_DailyReports" ReturnType="Collection(RISDBModel.GET_R_DailyReports_Result)" />
+          <FunctionImport Name="GET_POS_ItemServiceList_details" ReturnType="Collection(RISDBModel.GET_POS_ItemServiceList_details_Result)">
+            <Parameter Name="ReceiptNo" Mode="In" Type="String" />
+            <Parameter Name="Total" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="GETTIME" ReturnType="Collection(String)" />
+          <EntitySet Name="M_Employee" EntityType="RISDBModel.M_Employee" />
           <EntitySet Name="M_Item" EntityType="RISDBModel.M_Item" />
           <EntitySet Name="M_ItemCategory" EntityType="RISDBModel.M_ItemCategory" />
           <EntitySet Name="M_Service" EntityType="RISDBModel.M_Service" />
@@ -181,12 +210,12 @@
           <EntitySet Name="M_Stocks" EntityType="RISDBModel.M_Stocks" />
           <EntitySet Name="M_Users" EntityType="RISDBModel.M_Users" />
           <EntitySet Name="POS_Receipt" EntityType="RISDBModel.POS_Receipt" />
-          <EntitySet Name="M_Employee" EntityType="RISDBModel.M_Employee" />
-          <FunctionImport Name="GET_M_EmployeeList" ReturnType="Collection(RISDBModel.GET_M_EmployeeList_Result)" />
-          <FunctionImport Name="GET_R_DailyReports" ReturnType="Collection(RISDBModel.GET_R_DailyReports_Result)" />
-          <FunctionImport Name="GET_POS_ItemServiceList_details" ReturnType="Collection(RISDBModel.GET_POS_ItemServiceList_details_Result)">
-            <Parameter Name="ReceiptNo" Mode="In" Type="String" />
-            <Parameter Name="Total" Mode="InOut" Type="Decimal" />
+          <EntitySet Name="T_EmployeeLogs" EntityType="RISDBModel.T_EmployeeLogs" />
+          <FunctionImport Name="Delete_EmployeeLogs">
+          <Parameter Name="Date" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GET_M_EmployeeAttendanceList" ReturnType="Collection(RISDBModel.GET_M_EmployeeAttendanceList_Result)">
+            <Parameter Name="Date" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GET_M_ServiceList_Result">
@@ -235,6 +264,49 @@
           <Property Type="String" Name="ReceiptRefNo" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="Date" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="GET_M_EmployeeList_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Family_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Date_Hired" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="DailyWage" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Date_Resigned" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="EmployeePhoto" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="String" Name="CreateID" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UpdateID" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GET_R_DailyReports_Result">
+          <Property Type="Decimal" Name="TotalProfit" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="GET_POS_ItemServiceList_details_Result">
+          <Property Type="String" Name="ReceiptRefNo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="Int32" Name="RetailPrice" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="M_Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Family_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Hired" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DailyWage" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date_Resigned" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="M_Item">
           <Key>
             <PropertyRef Name="ID" />
@@ -338,48 +410,25 @@
           <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="M_Employee">
+        <EntityType Name="T_EmployeeLogs">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Family_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Hired" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DailyWage" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Date_Resigned" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int64" />
+          <Property Name="DateAttendance" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Wages" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CreateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdateID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <ComplexType Name="GET_M_EmployeeList_Result">
+        <ComplexType Name="GET_M_EmployeeAttendanceList_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
           <Property Type="String" Name="Family_Name" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="First_Name" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Date_Hired" Nullable="true" MaxLength="100" />
-          <Property Type="Decimal" Name="DailyWage" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="Date_Resigned" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="EmployeePhoto" Nullable="true" />
-          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
-          <Property Type="String" Name="CreateID" Nullable="false" MaxLength="20" />
-          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="UpdateID" Nullable="false" MaxLength="20" />
-          <Property Type="DateTime" Name="UpdateDate" Nullable="false" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="GET_R_DailyReports_Result">
-          <Property Type="Decimal" Name="TotalProfit" Nullable="true" Precision="38" Scale="0" />
-          <Property Type="String" Name="Date" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="GET_POS_ItemServiceList_details_Result">
-          <Property Type="String" Name="ReceiptRefNo" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ItemName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Amount" Nullable="true" />
-          <Property Type="Int32" Name="RetailPrice" Nullable="true" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DateAttendance" Nullable="true" MaxLength="100" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -453,6 +502,63 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_M_EmployeeList" FunctionName="RISDBModel.Store.GET_M_EmployeeList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_M_EmployeeList_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
+                <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
+                <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
+                <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_R_DailyReports" FunctionName="RISDBModel.Store.GET_R_DailyReports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_R_DailyReports_Result">
+                <ScalarProperty Name="TotalProfit" ColumnName="TotalProfit" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GET_POS_ItemServiceList_details" FunctionName="RISDBModel.Store.GET_POS_ItemServiceList_details">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ItemServiceList_details_Result">
+                <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GETTIME" FunctionName="RISDBModel.Store.GETTIME" />
+          <EntitySetMapping Name="M_Employee">
+            <EntityTypeMapping TypeName="RISDBModel.M_Employee">
+              <MappingFragment StoreEntitySet="M_Employee">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
+                <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
+                <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
+                <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="M_Item">
             <EntityTypeMapping TypeName="RISDBModel.M_Item">
               <MappingFragment StoreEntitySet="M_Item">
@@ -563,59 +669,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="M_Employee">
-            <EntityTypeMapping TypeName="RISDBModel.M_Employee">
-              <MappingFragment StoreEntitySet="M_Employee">
+          <EntitySetMapping Name="T_EmployeeLogs">
+            <EntityTypeMapping TypeName="RISDBModel.T_EmployeeLogs">
+              <MappingFragment StoreEntitySet="T_EmployeeLogs">
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateID" ColumnName="CreateID" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
-                <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
-                <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
-                <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
+                <ScalarProperty Name="Wages" ColumnName="Wages" />
+                <ScalarProperty Name="DateAttendance" ColumnName="DateAttendance" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GET_M_EmployeeList" FunctionName="RISDBModel.Store.GET_M_EmployeeList">
+          <FunctionImportMapping FunctionImportName="Delete_EmployeeLogs" FunctionName="RISDBModel.Store.Delete_EmployeeLogs" />
+          <FunctionImportMapping FunctionImportName="GET_M_EmployeeAttendanceList" FunctionName="RISDBModel.Store.GET_M_EmployeeAttendanceList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="RISDBModel.GET_M_EmployeeList_Result">
+              <ComplexTypeMapping TypeName="RISDBModel.GET_M_EmployeeAttendanceList_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Family_Name" ColumnName="Family_Name" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Date_Hired" ColumnName="Date_Hired" />
-                <ScalarProperty Name="DailyWage" ColumnName="DailyWage" />
-                <ScalarProperty Name="Date_Resigned" ColumnName="Date_Resigned" />
                 <ScalarProperty Name="EmployeePhoto" ColumnName="EmployeePhoto" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GET_R_DailyReports" FunctionName="RISDBModel.Store.GET_R_DailyReports">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RISDBModel.GET_R_DailyReports_Result">
-                <ScalarProperty Name="TotalProfit" ColumnName="TotalProfit" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GET_POS_ItemServiceList_details" FunctionName="RISDBModel.Store.GET_POS_ItemServiceList_details">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="RISDBModel.GET_POS_ItemServiceList_details_Result">
-                <ScalarProperty Name="ReceiptRefNo" ColumnName="ReceiptRefNo" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DateAttendance" ColumnName="DateAttendance" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
